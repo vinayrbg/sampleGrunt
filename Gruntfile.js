@@ -116,6 +116,17 @@ module.exports = function(grunt) {
       },
     },
 
+    less:{
+      dev:{
+        options:{
+          paths: ["less/"]
+        },
+        files:{
+          "css/style.css" : "less/source.less"
+        }
+      }
+    },
+
 
     /**
      * Sass compiling
@@ -194,6 +205,11 @@ module.exports = function(grunt) {
         tasks: ['sass:dev'],
       },
 
+      less: {
+        files: '<%= dir.less %>/**/*',
+        tasks: ['less:dev'],
+      },
+
       // JShint, concat + uglify JS on change
       js: {
         files: '<%= jshint.files %>',
@@ -223,6 +239,7 @@ module.exports = function(grunt) {
     'concat:js',        // Concatenate main JS files
     'uglify',           // Minifiy concatenated JS file
     'sass:dev',         // Compile Sass with dev settings
+    'less:dev',
   ]);
 
 
@@ -256,6 +273,7 @@ module.exports = function(grunt) {
    * Load the plugins specified in `package.json`
    */
   grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-contrib-uglify');
